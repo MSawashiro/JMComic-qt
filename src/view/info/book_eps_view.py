@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore
 from PySide6.QtCore import QSize
 from PySide6.QtGui import Qt, QFont
 from PySide6.QtWidgets import QLabel, QListWidgetItem
@@ -56,7 +56,7 @@ class BookEpsView(QtWidgets.QWidget, Ui_BookEps, QtTaskBase):
             return
         downloadEpsId = QtOwner().downloadView.GetDownloadEpsId(self.bookId)
         for index, epsInfo in info.pageInfo.epsInfo.items():
-            label = QLabel(str(index + 1) + "-" + epsInfo.title)
+            label = QLabel(str(index) + "-" + epsInfo.title)
             label.setAlignment(Qt.AlignCenter)
             # label.setStyleSheet("color: rgb(196, 95, 125);")
             font = QFont()
@@ -68,6 +68,7 @@ class BookEpsView(QtWidgets.QWidget, Ui_BookEps, QtTaskBase):
             item = QListWidgetItem(self.listWidget)
             item.setSizeHint(label.sizeHint() + QSize(20, 20))
             item.setToolTip(epsInfo.title)
+            item.setData(QtCore.Qt.UserRole, index)
             if index in downloadEpsId:
                 item.setSelected(True)
             else:
@@ -89,7 +90,7 @@ class BookEpsView(QtWidgets.QWidget, Ui_BookEps, QtTaskBase):
         for i in range(self.listWidget.count()):
             item = self.listWidget.item(i)
             item.setSelected(False)
-            if i in downloadEpsId:
+            if int(item.data(QtCore.Qt.UserRole)) in downloadEpsId:
                 item.setSelected(True)
             else:
                 item.setSelected(False)
@@ -105,7 +106,7 @@ class BookEpsView(QtWidgets.QWidget, Ui_BookEps, QtTaskBase):
         for i in range(self.listWidget.count()):
             item = self.listWidget.item(i)
             if item.isSelected():
-                downloadIds.append(i)
+                downloadIds.append(int(item.data(QtCore.Qt.UserRole)))
 
             # if item.background().color() == self.blue:
             #     downloadIds.append(i)

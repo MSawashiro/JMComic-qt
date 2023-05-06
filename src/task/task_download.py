@@ -209,6 +209,7 @@ class TaskDownload(TaskBase, QtTaskBase):
 
                 # 失败了
                 if task.resetCnt >= 5:
+                    Log.Warn("重试了5次失败" + str(taskId))
                     self.SetTaskStatus(taskId, backData, task.Error)
                     return
 
@@ -282,18 +283,21 @@ class TaskDownload(TaskBase, QtTaskBase):
 
                 imgUrl = epsInfo.pictureUrl.get(task.index)
                 if not imgUrl:
-                    self.SetTaskStatus(taskId, backData, task.Error)
+                    Log.Warn("图片不存在" + str(taskId))
+                    self.SetTaskStatus(taskId, backData, task.Error, "no pic")
                     return
 
                 self.AddDownloadTask(imgUrl, "", task.downloadCallBack, task.downloadCompleteBack, task.statusBack,
                     task.backParam, task.loadPath, task.cachePath, task.savePath, task.saveParam, task.cleanFlag)
         except Exception as es:
+            Log.Warn("发生错误" + str(taskId))
             self.SetTaskStatus(taskId, backData, task.Error)
             Log.Error(es)
         return
 
-    def SetTaskStatus(self, taskId, backData, status):
+    def SetTaskStatus(self, taskId, backData, status, errorMsg=''):
         backData["st"] = status
+        backData["errorMsg"] = errorMsg
         self.taskObj.downloadStBack.emit(taskId, dict(backData))
         return
 

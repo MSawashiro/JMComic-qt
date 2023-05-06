@@ -186,6 +186,7 @@ class DownloadStatus(QtTaskBase):
         if task.status != task.Downloading:
             return
         st = data.get("st")
+        errorMsg = data.get("errorMsg")
         task.statusMsg = st
 
         # 获取信息成功， 正式开始下载
@@ -208,7 +209,24 @@ class DownloadStatus(QtTaskBase):
             task.statusMsg = st
             self.UpdateTableItem(task)
         else:
-            self.SetNewStatus(task, task.Error)
+            if errorMsg == "no pic":
+                Log.Warn(
+                    "DownloadStCallBack no pic error, bookId:{}, epsId:{}, index:{}, stMsg:{}"
+                    .format(task.bookId, task.curDownloadEpsId, task.curDownloadPic, task.statusMsg))
+
+                newStatus = task.DownloadSucCallBack()
+                self.SetNewStatus(task, newStatus)
+                if newStatus == task.Downloading:
+                    epsIndex, index, savePath, isInit = task.GetDownloadPath()
+                    self.AddDownloadBook(task.bookId, epsIndex, index, self.DownloadStCallBack, self.DownloadCallBack,
+                                         self.DownloadCompleteCallBack, task.bookId, savePath=savePath,
+                                         cleanFlag=task.cleanFlag, isInit=isInit)
+                return
+            else:
+                Log.Warn(
+                    "DownloadStCallBack Download error, bookId:{}, epsId:{}, index:{}, stMsg:{}"
+                    .format(task.bookId, task.curDownloadEpsId, task.curDownloadPic, task.statusMsg))
+                self.SetNewStatus(task, task.Error)
         return
 
     def DownloadCallBack(self, downloadSize, laveFileSize, taskId):
@@ -237,6 +255,8 @@ class DownloadStatus(QtTaskBase):
             self.UpdateTableItem(task)
             self.UpdateTaskDB(task)
         else:
+            Log.Warn("DownloadCompleteCallBack Download error, bookId:{}, epsId:{}, index:{}, stMsg:{}"
+                     .format(task.bookId, task.curDownloadEpsId, task.curDownloadPic, task.statusMsg))
             self.SetNewStatus(task, task.Error)
         return
 
