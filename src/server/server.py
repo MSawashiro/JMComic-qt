@@ -3,6 +3,7 @@ import pickle
 import threading
 from queue import Queue
 
+# import cloudscraper
 import requests
 import urllib3
 from urllib3.util.ssl_ import is_ipaddress
@@ -77,6 +78,7 @@ class Server(Singleton):
         super().__init__()
         self.handler = {}
         self.session = requests.session()
+        # self.session2 = cloudscraper.session()
         self.address = ""
         self.imageServer = ""
 
@@ -129,8 +131,30 @@ class Server(Singleton):
                 Log.Error(es)
         pass
 
-    def UpdateDns(self, domain, address):
-        host_table[domain] = address
+    def UpdateDns(self, address, imageAddress, loginProxy=""):
+        for domain in config.Url2List:
+            domain = ToolUtil.GetUrlHost(domain)
+            if is_ipaddress(address):
+                host_table[domain] = address
+            elif not address and domain in host_table:
+                host_table.pop(domain)
+
+        for domain in config.PicUrlList:
+            domain = ToolUtil.GetUrlHost(domain)
+            if is_ipaddress(imageAddress):
+                host_table[domain] = imageAddress
+            elif not imageAddress and domain in host_table:
+                host_table.pop(domain)
+        domain = ToolUtil.GetUrlHost(config.Url)
+        if loginProxy:
+            host_table[domain] = loginProxy
+        else:
+            if loginProxy in host_table:
+                host_table.pop(domain)
+
+        # 换一个，清空pool
+        self.session = requests.session()
+        return
 
     def ClearDns(self):
         host_table.clear()
@@ -170,6 +194,8 @@ class Server(Singleton):
                 self.Post(task)
             elif task.req.method.lower() == "get":
                 self.Get(task)
+            elif task.req.method.lower() == "get2":
+                self.Get2(task)
             elif task.req.method.lower() == "put":
                 self.Put(task)
             else:
@@ -263,6 +289,22 @@ class Server(Singleton):
         else:
             r = self.session.get(request.url, proxies=request.proxy, headers=request.headers, timeout=task.timeout,
                                  verify=False)
+        task.res = res.BaseRes(r, request.isParseRes)
+        return task
+
+    def Get2(self, task):
+        request = task.req
+        if request.params == None:
+            request.params = {}
+
+        if request.headers == None:
+            request.headers = {}
+
+        task.res = res.BaseRes("", False)
+        if task.req.cookies:
+            r = self.session.get(request.url, proxies=request.proxy, headers=request.headers, timeout=task.timeout, cookies=task.req.cookies)
+        else:
+            r = self.session.get(request.url, proxies=request.proxy, headers=request.headers, timeout=task.timeout)
         task.res = res.BaseRes(r, request.isParseRes)
         return task
 

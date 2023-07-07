@@ -1,6 +1,6 @@
 import time
 
-Url = "https://jmcomic1.group/"       # 域名
+Url = "https://18comic.org/"       # 域名
 UrlBack = "https://jmcomic.ggo.icu/"       # 域名
 
 
@@ -42,11 +42,11 @@ UpdateUrl3 = "https://hub.fastgit.xyz/tonquer/JMComic-qt/releases/latest"
 UpdateUrl3Api = "https://api.fastgit.xyz/repos/tonquer/JMComic-qt/releases"
 UpdateUrl3Back = "https://hub.fastgit.xyz/tonquer/JMComic-qt"
 
-UpdateVersion = "v1.0.9"
-RealVersion = "v1.0.9"
-VersionTime = "2023-2-13"
+UpdateVersion = "v1.1.1"
+RealVersion = "v1.1.1"
+VersionTime = "2023-6-14"
 
-Waifu2xVersion = "1.1.5"
+Waifu2xVersion = "1.1.6"
 LoginUserName = ""
 
 
@@ -61,6 +61,11 @@ EncodeGpu = ""
 Waifu2xPath = "waifu2x"
 
 IsTips = 1
+
+# 代理与分流相关
+ProxyUrl1 = "https://github.com/tonquer/picacg-qt/discussions/48"
+ProxyUrl2 = "https://hub.ggo.icu/tonquer/picacg-qt/discussions/48"
+ProxyUrl3 = "https://hub.fastgit.xyz/tonquer/picacg-qt/discussions/48"
 
 # ISSUES
 Issues1 = "https://github.com/tonquer/JMComic-qt/issues"

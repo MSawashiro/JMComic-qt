@@ -99,7 +99,7 @@ class FavoriteView(QtWidgets.QWidget, Ui_Favorite, QtTaskBase):
         if page > self.bookList.pages:
             return
         self.bookList.clear()
-        self.RefreshData(self.bookList.page)
+        self.RefreshData(page)
 
     def RefreshData(self, page=1):
         QtOwner().ShowLoading()
@@ -127,8 +127,8 @@ class FavoriteView(QtWidgets.QWidget, Ui_Favorite, QtTaskBase):
                     if not self.folderDict:
                         self.folderDict = f.fold.copy()
                         self.InitFolder(index)
-                self.bookList.UpdatePage(page)
-                self.nums.setText(self.bookList.GetPageText())
+                self.bookList.UpdatePage(page, self.bookList.pages)
+                self.nums.setText(self.bookList.GetPageStr())
                 for book in bookList:
                     self.bookList.AddBookItemByBook(book)
             else:

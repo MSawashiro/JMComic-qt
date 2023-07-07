@@ -83,6 +83,12 @@ QScrollArea {background-color:transparent;}</string>
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
                 <widget class="QLabel" name="label">
+                 <property name="minimumSize">
+                  <size>
+                   <width>80</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
                    <width>40</width>
@@ -113,6 +119,12 @@ QScrollArea {background-color:transparent;}</string>
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
                 <widget class="QLabel" name="label_6">
+                 <property name="minimumSize">
+                  <size>
+                   <width>80</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
                    <width>40</width>
@@ -144,7 +156,7 @@ QScrollArea {background-color:transparent;}</string>
                   <widget class="QLabel" name="label_2">
                    <property name="minimumSize">
                     <size>
-                     <width>0</width>
+                     <width>80</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -192,6 +204,12 @@ QScrollArea {background-color:transparent;}</string>
               <layout class="QHBoxLayout" name="horizontalLayout_5">
                <item>
                 <widget class="QLabel" name="label_3">
+                 <property name="minimumSize">
+                  <size>
+                   <width>80</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
                    <width>40</width>
@@ -224,7 +242,7 @@ QScrollArea {background-color:transparent;}</string>
                 <widget class="QLabel" name="label_4">
                  <property name="minimumSize">
                   <size>
-                   <width>40</width>
+                   <width>80</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -254,7 +272,7 @@ QScrollArea {background-color:transparent;}</string>
                 <widget class="QLabel" name="label_8">
                  <property name="minimumSize">
                   <size>
-                   <width>0</width>
+                   <width>80</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -282,9 +300,15 @@ QScrollArea {background-color:transparent;}</string>
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
                 <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>80</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
+                   <width>40</width>
                    <height>40</height>
                   </size>
                  </property>
@@ -294,36 +318,23 @@ QScrollArea {background-color:transparent;}</string>
                 </widget>
                </item>
                <item>
-                <widget class="TagListWidget" name="tagsList">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>60</height>
-                  </size>
-                 </property>
+                <widget class="QWidget" name="tagList" native="true">
                  <property name="styleSheet">
-                  <string notr="true">QListWidget {background-color:transparent;}
-QListWidget::item {
-    background-color:rgb(251, 239, 243);
-    color: rgb(196, 95, 125);
-	border:2px solid red;
-    border-radius: 10px;
-	border-color:rgb(196, 95, 125);
-}
-/* 鼠标在按钮上时，按钮颜色 */
- QListWidget::item:hover 
-{
-    background-color:rgb(21, 85, 154);
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-}
+                  <string notr="true">QPushButton {
+                   background-color:rgb(251, 239, 243);
+                   color: rgb(196, 95, 125);
+                   border:2px solid red;
+                   border-radius: 10px;
+                   border-color:rgb(196, 95, 125);
+                   }
+                   /* 鼠标在按钮上时，按钮颜色 */
+                   QPushButton:hover
+                   {
+                   background-color:rgb(21, 85, 154);
+                   border-radius: 10px;
+                   color: rgb(0, 0, 0);
+                   }
 </string>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="spacing">
-                  <number>6</number>
                  </property>
                 </widget>
                </item>
@@ -333,6 +344,12 @@ QListWidget::item {
               <layout class="QHBoxLayout" name="horizontalLayout_9">
                <item>
                 <widget class="QLabel" name="label_7">
+                 <property name="minimumSize">
+                  <size>
+                   <width>80</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="maximumSize">
                   <size>
                    <width>55</width>
@@ -407,7 +424,7 @@ QListWidget::item {
                   <string notr="true">background-color:transparent;</string>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string>收藏</string>
                  </property>
                  <property name="icon">
                   <iconset resource="../res/images.qrc">
@@ -422,6 +439,35 @@ QListWidget::item {
                  </property>
                  <property name="checkable">
                   <bool>false</bool>
+                 </property>
+                 <property name="toolButtonStyle">
+                  <enum>Qt::ToolButtonTextBesideIcon</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="localButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>本地</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../res/images.qrc">
+                   <normaloff>:/png/icon/icon_like_off.png</normaloff>:/png/icon/icon_like_off.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>50</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="toolButtonStyle">
+                  <enum>Qt::ToolButtonTextBesideIcon</enum>
                  </property>
                 </widget>
                </item>
@@ -440,7 +486,7 @@ QListWidget::item {
                   <string notr="true">background-color:transparent;</string>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string>评论</string>
                  </property>
                  <property name="icon">
                   <iconset resource="../res/images.qrc">
@@ -451,6 +497,9 @@ QListWidget::item {
                    <width>50</width>
                    <height>50</height>
                   </size>
+                 </property>
+                 <property name="toolButtonStyle">
+                  <enum>Qt::ToolButtonTextBesideIcon</enum>
                  </property>
                 </widget>
                </item>
@@ -689,8 +738,8 @@ QListWidget::item {
    <slot>StartRead()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>519</x>
-     <y>478</y>
+     <x>627</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>313</x>
@@ -705,8 +754,8 @@ QListWidget::item {
    <slot>AddDownload()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>438</x>
-     <y>478</y>
+     <x>546</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>788</x>
@@ -721,12 +770,28 @@ QListWidget::item {
    <slot>AddFavorite()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>392</x>
-     <y>478</y>
+     <x>297</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>781</x>
      <y>432</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>localButton</sender>
+   <signal>clicked()</signal>
+   <receiver>BookInfo</receiver>
+   <slot>AddLocalFavorite()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>477</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>452</y>
     </hint>
    </hints>
   </connection>
@@ -737,5 +802,6 @@ QListWidget::item {
   <slot>StartRead()</slot>
   <slot>AddBookLike()</slot>
   <slot>ChangeTab()</slot>
+  <slot>AddLocalFavorite()</slot>
  </slots>
 </ui>
