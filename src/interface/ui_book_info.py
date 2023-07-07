@@ -18,7 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLayout,
     QHBoxLayout, QLabel, QLayout, QListView,
     QListWidgetItem, QPlainTextEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QTabWidget, QVBoxLayout, QWidget)
+    QSpacerItem, QTabWidget, QToolButton, QVBoxLayout,
+    QWidget)
 
 from component.button.icon_tool_button import IconToolButton
 from component.list.eps_list_widget import EpsListWidget
@@ -87,6 +88,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.label = QLabel(self.scrollAreaWidgetContents)
         self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(80, 0))
         self.label.setMaximumSize(QSize(40, 16777215))
         self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
@@ -105,6 +107,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.label_6 = QLabel(self.scrollAreaWidgetContents)
         self.label_6.setObjectName(u"label_6")
+        self.label_6.setMinimumSize(QSize(80, 0))
         self.label_6.setMaximumSize(QSize(40, 16777215))
 
         self.horizontalLayout_8.addWidget(self.label_6)
@@ -124,7 +127,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_11.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.label_2 = QLabel(self.scrollAreaWidgetContents)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setMinimumSize(QSize(0, 0))
+        self.label_2.setMinimumSize(QSize(80, 0))
         self.label_2.setMaximumSize(QSize(16777215, 40))
 
         self.horizontalLayout_11.addWidget(self.label_2)
@@ -150,6 +153,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.label_3 = QLabel(self.scrollAreaWidgetContents)
         self.label_3.setObjectName(u"label_3")
+        self.label_3.setMinimumSize(QSize(80, 0))
         self.label_3.setMaximumSize(QSize(40, 16777215))
         self.label_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
@@ -169,7 +173,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.label_4 = QLabel(self.scrollAreaWidgetContents)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setMinimumSize(QSize(40, 0))
+        self.label_4.setMinimumSize(QSize(80, 0))
         self.label_4.setMaximumSize(QSize(40, 16777215))
 
         self.horizontalLayout_6.addWidget(self.label_4)
@@ -186,7 +190,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.label_8 = QLabel(self.scrollAreaWidgetContents)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setMinimumSize(QSize(0, 0))
+        self.label_8.setMinimumSize(QSize(80, 0))
         self.label_8.setMaximumSize(QSize(40, 16777215))
 
         self.horizontalLayout_12.addWidget(self.label_8)
@@ -203,33 +207,30 @@ class Ui_BookInfo(object):
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.label_5 = QLabel(self.scrollAreaWidgetContents)
         self.label_5.setObjectName(u"label_5")
-        self.label_5.setMaximumSize(QSize(16777215, 40))
+        self.label_5.setMinimumSize(QSize(80, 0))
+        self.label_5.setMaximumSize(QSize(40, 40))
 
         self.horizontalLayout_7.addWidget(self.label_5)
 
-        self.tagsList = TagListWidget(self.scrollAreaWidgetContents)
-        self.tagsList.setObjectName(u"tagsList")
-        self.tagsList.setMaximumSize(QSize(16777215, 60))
-        self.tagsList.setStyleSheet(u"QListWidget {background-color:transparent;}\n"
-"QListWidget::item {\n"
-"    background-color:rgb(251, 239, 243);\n"
-"    color: rgb(196, 95, 125);\n"
-"	border:2px solid red;\n"
-"    border-radius: 10px;\n"
-"	border-color:rgb(196, 95, 125);\n"
-"}\n"
-"/* \u9f20\u6807\u5728\u6309\u94ae\u4e0a\u65f6\uff0c\u6309\u94ae\u989c\u8272 */\n"
-" QListWidget::item:hover \n"
-"{\n"
-"    background-color:rgb(21, 85, 154);\n"
-"    border-radius: 10px;\n"
-"    color: rgb(0, 0, 0);\n"
-"}\n"
+        self.tagList = QWidget(self.scrollAreaWidgetContents)
+        self.tagList.setObjectName(u"tagList")
+        self.tagList.setStyleSheet(u"QPushButton {\n"
+"                   background-color:rgb(251, 239, 243);\n"
+"                   color: rgb(196, 95, 125);\n"
+"                   border:2px solid red;\n"
+"                   border-radius: 10px;\n"
+"                   border-color:rgb(196, 95, 125);\n"
+"                   }\n"
+"                   /* \u9f20\u6807\u5728\u6309\u94ae\u4e0a\u65f6\uff0c\u6309\u94ae\u989c\u8272 */\n"
+"                   QPushButton:hover\n"
+"                   {\n"
+"                   background-color:rgb(21, 85, 154);\n"
+"                   border-radius: 10px;\n"
+"                   color: rgb(0, 0, 0);\n"
+"                   }\n"
 "")
-        self.tagsList.setFrameShape(QFrame.NoFrame)
-        self.tagsList.setSpacing(6)
 
-        self.horizontalLayout_7.addWidget(self.tagsList)
+        self.horizontalLayout_7.addWidget(self.tagList)
 
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_7)
@@ -238,6 +239,7 @@ class Ui_BookInfo(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.label_7 = QLabel(self.scrollAreaWidgetContents)
         self.label_7.setObjectName(u"label_7")
+        self.label_7.setMinimumSize(QSize(80, 0))
         self.label_7.setMaximumSize(QSize(55, 20))
 
         self.horizontalLayout_9.addWidget(self.label_7)
@@ -285,18 +287,31 @@ class Ui_BookInfo(object):
         self.favoriteButton.setIcon(icon)
         self.favoriteButton.setIconSize(QSize(50, 50))
         self.favoriteButton.setCheckable(False)
+        self.favoriteButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
 
         self.horizontalLayout_2.addWidget(self.favoriteButton)
+
+        self.localButton = QToolButton(self.tab)
+        self.localButton.setObjectName(u"localButton")
+        self.localButton.setMinimumSize(QSize(40, 40))
+        icon1 = QIcon()
+        icon1.addFile(u":/png/icon/icon_like_off.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.localButton.setIcon(icon1)
+        self.localButton.setIconSize(QSize(50, 50))
+        self.localButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+
+        self.horizontalLayout_2.addWidget(self.localButton)
 
         self.commentButton = IconToolButton(self.tab)
         self.commentButton.setObjectName(u"commentButton")
         self.commentButton.setMinimumSize(QSize(40, 40))
         self.commentButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.commentButton.setStyleSheet(u"background-color:transparent;")
-        icon1 = QIcon()
-        icon1.addFile(u":/png/icon/icon_comment.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.commentButton.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/png/icon/icon_comment.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.commentButton.setIcon(icon2)
         self.commentButton.setIconSize(QSize(50, 50))
+        self.commentButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
 
         self.horizontalLayout_2.addWidget(self.commentButton)
 
@@ -305,9 +320,9 @@ class Ui_BookInfo(object):
         self.downloadButton.setMinimumSize(QSize(40, 40))
         self.downloadButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.downloadButton.setStyleSheet(u"background-color:transparent;")
-        icon2 = QIcon()
-        icon2.addFile(u":/png/icon/ic_get_app_black_36dp.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.downloadButton.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/png/icon/ic_get_app_black_36dp.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.downloadButton.setIcon(icon3)
         self.downloadButton.setIconSize(QSize(50, 50))
 
         self.horizontalLayout_2.addWidget(self.downloadButton)
@@ -419,6 +434,7 @@ class Ui_BookInfo(object):
         self.startRead.clicked.connect(BookInfo.StartRead)
         self.downloadButton.clicked.connect(BookInfo.AddDownload)
         self.favoriteButton.clicked.connect(BookInfo.AddFavorite)
+        self.localButton.clicked.connect(BookInfo.AddLocalFavorite)
 
         self.tabWidget.setCurrentIndex(0)
 
@@ -442,8 +458,9 @@ class Ui_BookInfo(object):
         self.label_5.setText(QCoreApplication.translate("BookInfo", u"Tags\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("BookInfo", u"\u89c2\u770b\u6570\uff1a", None))
         self.views.setText("")
-        self.favoriteButton.setText("")
-        self.commentButton.setText("")
+        self.favoriteButton.setText(QCoreApplication.translate("BookInfo", u"\u6536\u85cf", None))
+        self.localButton.setText(QCoreApplication.translate("BookInfo", u"\u672c\u5730", None))
+        self.commentButton.setText(QCoreApplication.translate("BookInfo", u"\u8bc4\u8bba", None))
         self.downloadButton.setText("")
         self.startRead.setText(QCoreApplication.translate("BookInfo", u"\u5f00\u59cb\u9605\u8bfb", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("BookInfo", u"\u9605\u8bfb", None))

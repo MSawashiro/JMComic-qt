@@ -20,14 +20,14 @@ class ServerReq(object):
         self.isUseHttps = bool(Setting.IsUseHttps.value)
         self.proxyUrl = ""
         self.cookies = {}
-        if Setting.ProxySelectIndex.value == 5:
-            host = ToolUtil.GetUrlHost(url)
-            if host in config.Url2List:
-                self.proxyUrl = config.ProxyApiDomain
-            elif host == config.Url:
-                self.proxyUrl = config.ProxyApiDomain
-            elif host in config.PicUrlList:
-                self.proxyUrl = config.ProxyImgDomain
+        # if Setting.ProxySelectIndex.value == 5:
+        #     host = ToolUtil.GetUrlHost(url)
+        #     if host in config.Url2List:
+        #         self.proxyUrl = config.ProxyApiDomain
+        #     elif host == config.Url:
+        #         self.proxyUrl = config.ProxyApiDomain
+        #     elif host in config.PicUrlList:
+        #         self.proxyUrl = config.ProxyImgDomain
 
         if Setting.IsHttpProxy.value == 1:
             self.proxy = {"http": Setting.HttpProxy.value, "https": Setting.HttpProxy.value}
@@ -61,7 +61,7 @@ class ServerReq(object):
         token = hashlib.md5(param.encode("utf-8")).hexdigest()
 
         header = {
-            "tokenparam": "{},1.4.7".format(self.now),
+            "tokenparam": "{},1.5.2".format(self.now),
             "token": token,
             "user-agent": "okhttp/3.12.1",
             "accept-encoding": "gzip",
@@ -75,7 +75,7 @@ class ServerReq(object):
         token = hashlib.md5(param.encode("utf-8")).hexdigest()
 
         header = {
-            "tokenparam": "{},1.4.7".format(self.now),
+            "tokenparam": "{},1.5.2".format(self.now),
             "token": token,
             "user-agent": "okhttp/3.12.1",
             "accept-encoding": "gzip",
@@ -84,13 +84,32 @@ class ServerReq(object):
             header["Content-Type"] = "application/x-www-form-urlencoded"
         return header
 
-    def GetWebHeader(self) -> dict:
+    def GetWebHeader2(self) -> dict:
         return \
         {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-            "Upgrade-Insecure-Requests": "1"
+            # "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            # "Upgrade-Insecure-Requests": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.43"
         }
-    
+
+    def GetWebHeader(self) -> dict:
+        return {
+        # 'authority': '18comic.org',
+          "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-encoding":"gzip, deflate, br",
+           # "cookie": 'ipcountry=CN; ipm5=6846bee8bfbb7323e83d0f32c635eae9',
+          "accept-language":"zh-CN,zh;q=0.9",
+           "upgrade-insecure-requests":"1",
+            # 'sec-ch-ua':'"Not.A/Brand";v="8", "Chromium";v="114", "Microsoft Edge";v="114"',
+            # 'sec-ch-ua-mobile': '?0',
+            # 'sec-ch-ua-platform': '"Windows"',
+            # 'sec-fetch-dest': 'document',
+            # 'sec-fetch-mode': 'navigate',
+            # 'sec-fetch-site': 'none',
+            # 'sec-fetch-user': '?1',
+            'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.43"
+        }
+
     def ParseData(self, data) -> str:
         param = "{}{}".format(self.now, "18comicAPPContent")
         key = hashlib.md5(param.encode("utf-8")).hexdigest()
@@ -140,7 +159,7 @@ class DownloadBookReq(ServerReq):
 # 注册前，需要获取cookie
 class LoginPreReq(ServerReq):
     def __init__(self):
-        method = "Get"
+        method = "Get2"
         url = config.Url + "/login"
         super(self.__class__, self).__init__(url, {}, method)
         self.headers = self.GetWebHeader()
@@ -225,7 +244,7 @@ class ResetPasswordReq(ServerReq):
 # 验证码图片
 class GetCaptchaReq(ServerReq):
     def __init__(self):
-        method = "Get"
+        method = "Get2"
         url = config.Url + "/captcha"
 
         data = dict()
@@ -763,7 +782,7 @@ class SpeedTestReq(ServerReq):
     URLS = [
         # "/media/photos/295840/00001.jpg"
         # "/media/photos/295840/00002.jpg",
-        "/media/photos/295840/00003.jpg",
+        "/media/photos/292840/00002.webp",
         # "/media/photos/295840/00004.jpg",
     ]
 
