@@ -102,7 +102,7 @@ class BookInfoView(QtWidgets.QWidget, Ui_BookInfo, QtTaskBase):
         bookId = kwargs.get("bookId")
         if bookId:
             self.bookId = bookId
-            self.idLabel.setText(str(bookId))
+            self.idLabel.setText(bookId)
             self.OpenBook(bookId)
 
         bookName = kwargs.get("bookName")

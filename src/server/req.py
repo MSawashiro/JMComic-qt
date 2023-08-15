@@ -10,6 +10,8 @@ from Cryptodome.Cipher import AES
 
 
 class ServerReq(object):
+    SPACE_PIC = set()  # 优先使用CDN，如果出现空白图片则回源
+
     def __init__(self, url, params=None, method="POST") -> None:
         self.url = url
         self.params = params
@@ -61,9 +63,9 @@ class ServerReq(object):
         token = hashlib.md5(param.encode("utf-8")).hexdigest()
 
         header = {
-            "tokenparam": "{},1.5.2".format(self.now),
+            "tokenparam": "{},1.5.7".format(self.now),
             "token": token,
-            "user-agent": "okhttp/3.12.1",
+            "user-agent": "Mozilla/5.0 (Linux; Android 7.1.2; DT1901A Build/N2G47O; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.198 Mobile Safari/537.36",
             "accept-encoding": "gzip",
         }
         if method == "POST":
@@ -75,9 +77,9 @@ class ServerReq(object):
         token = hashlib.md5(param.encode("utf-8")).hexdigest()
 
         header = {
-            "tokenparam": "{},1.5.2".format(self.now),
+            "tokenparam": "{},1.5.7".format(self.now),
             "token": token,
-            "user-agent": "okhttp/3.12.1",
+            "user-agent": "Mozilla/5.0 (Linux; Android 7.1.2; DT1901A Build/N2G47O; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.198 Mobile Safari/537.36",
             "accept-encoding": "gzip",
         }
         if method == "POST":
@@ -146,12 +148,15 @@ class DownloadBookReq(ServerReq):
     def __init__(self, url, loadPath="", cachePath="", savePath="", saveParam=(0, 0, ""), isReload=False):
         method = "Download"
         self.url = url
+        if self.url in ServerReq.SPACE_PIC:
+            self.url += "?v={}".format(int(time.time()))
+
         self.loadPath = loadPath
         self.cachePath = cachePath
         self.savePath = savePath
         self.saveParam = saveParam
         self.isReload = isReload
-        super(self.__class__, self).__init__(url, {}, method)
+        super(self.__class__, self).__init__(self.url, {}, method)
         self.headers = dict()
         self.headers["Accept-Encoding"] ="None"
 
